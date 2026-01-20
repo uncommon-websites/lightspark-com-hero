@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightspark Hero Recreation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9F9F9;
+            color: #111;
+        }
+
+        /* Custom Scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        /* Sky Background Simulation */
+        .sky-background {
+            background: linear-gradient(180deg, #2584C8 0%, #6FBCE8 60%, #A4D4F3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* CSS Clouds simulation for aesthetic match without external assets */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="w-full max-w-[1440px] mx-auto px-6 py-6 flex justify-between items-center">
+        <!-- Logo Section -->
+        <div class="flex items-center gap-2">
+            <!-- Logo Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
+                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor"/>
+            </svg>
+            <span class="text-xl font-semibold tracking-tight">lightspark</span>
+        </div>
+
+        <!-- Left Links (Desktop) -->
+        <div class="hidden md:flex items-center gap-8 ml-12 absolute left-48">
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Products</a>
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Use cases</a>
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Customers</a>
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Company</a>
+        </div>
+
+        <!-- Right Links -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">View Docs</a>
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Log in</a>
+            <a href="#" class="text-[15px] text-gray-600 hover:text-black font-medium">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Button (Visible only on small screens) -->
+        <button class="md:hidden text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-grow w-full max-w-[1440px] mx-auto px-6 mt-24 lg:mt-32 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-4">
+            <!-- Headline -->
+            <div>
+                <h1 class="text-5xl md:text-6xl lg:text-[68px] leading-[1.05] tracking-tight font-medium text-[#111]">
+                    Products and APIs<br>
+                    for moving money
+                </h1>
+            </div>
+
+            <!-- Subtext & CTA -->
+            <div class="lg:pl-24 flex flex-col justify-center">
+                <p class="text-lg md:text-[20px] leading-relaxed text-gray-500 max-w-md mb-8">
+                    Simple developer tools to send value instantly anywhere in the world on an open network.
+                </p>
+                <a href="#" class="inline-flex items-center text-[17px] font-medium text-black hover:opacity-70 transition-opacity group">
+                    Explore Grid 
+                    <svg class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Dashboard Preview -->
+    <div class="w-full px-6 pb-6">
+        <div class="sky-background w-full h-[500px] md:h-[600px] rounded-t-[32px] relative">
+            
+            <!-- CSS Clouds to mimic the design aesthetic -->
+            <div class="cloud w-64 h-64 top-20 left-10 opacity-60"></div>
+            <div class="cloud w-96 h-96 top-40 right-20 opacity-40"></div>
+            <div class="cloud w-48 h-48 bottom-10 left-1/3 opacity-50"></div>
+            <div class="cloud w-80 h-80 -top-10 right-1/3 opacity-30"></div>
+
+            <!-- Tabs Navigation -->
+            <div class="relative z-20 flex items-center gap-2 px-6 py-6 overflow-x-auto no-scrollbar">
+                <button class="bg-white text-blue-900 px-4 py-1.5 rounded-lg text-sm font-semibold shadow-sm whitespace-nowrap">
+                    Cross-border
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Ramps
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Pay-ins
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Payouts
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Cards
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Rewards
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Payroll
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    FX
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Treasury
+                </button>
+                <button class="text-white/90 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors">
+                    Node management
+                </button>
+            </div>
+
+            <!-- Central Glass Card -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[40%] z-20">
+                <div class="glass-card rounded-[24px] p-6 w-[340px] md:w-[380px] text-white">
+                    
+                    <!-- Top User: Maria -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <img src="https://placehold.co/48x48/2a9d8f/ffffff?text=M" alt="Maria" class="w-12 h-12 rounded-full border-2 border-white/20 object-cover">
+                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-[2px]">
+                                    <img src="https://placehold.co/16x16/firebrick/white?text=US" alt="US Flag" class="w-4 h-4 rounded-full object-cover">
+                                </div>
+                            </div>
+                            <span class="text-lg font-medium tracking-wide">Maria</span>
+                        </div>
+                        <span class="text-lg font-medium tracking-wide">US$250</span>
+                    </div>
+
+                    <!-- Arrow Connector -->
+                    <div class="flex justify-start pl-[22px] py-3">
+                        <div class="w-0.5 h-4 bg-white/30 mx-auto"></div> <!-- Line -->
+                    </div>
+                    <div class="absolute left-[46px] top-1/2 -translate-y-1/2 text-white/70">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+
+                    <!-- Bottom User: Elena -->
+                    <div class="flex items-center justify-between mt-1">
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <img src="https://placehold.co/48x48/e76f51/ffffff?text=E" alt="Elena" class="w-12 h-12 rounded-full border-2 border-white/20 object-cover">
+                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-[2px]">
+                                    <img src="https://placehold.co/16x16/green/white?text=MX" alt="MX Flag" class="w-4 h-4 rounded-full object-cover">
+                                </div>
+                            </div>
+                            <span class="text-lg font-medium tracking-wide">Elena</span>
+                        </div>
+                        <span class="text-lg font-medium tracking-wide">MX$4,600</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
