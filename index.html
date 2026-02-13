@@ -3,18 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightspark Hero Recreation</title>
+    <title>Lightspark - Pixel Perfect Recreation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        /* Typography Utilities */
+        .text-balance { text-wrap: balance; }
+        .text-pretty { text-wrap: pretty; }
         
+        /* Custom Font Settings */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9F9F9;
-            color: #111;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
 
-        /* Custom scrollbar hiding for the tabs */
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Base animation classes */
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .animate-scale-in {
+            opacity: 0;
+            animation: scaleIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* Staggered delays */
+        .delay-0 { animation-delay: 0ms; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-700 { animation-delay: 700ms; }
+
+        /* Glassmorphism utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* Hide scrollbar for horizontal scrolling nav */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -22,24 +87,35 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in-up,
+            .animate-fade-in,
+            .animate-scale-in {
+                animation: none;
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col">
+<body class="bg-[#FAFAFA] text-[#111111] overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="w-full px-6 py-6 flex items-center justify-between max-w-[1440px] mx-auto">
-        <!-- Left: Logo & Main Nav -->
+    <nav class="w-full px-6 py-6 md:px-10 flex items-center justify-between animate-fade-in delay-0 relative z-50">
+        <!-- Logo Section -->
         <div class="flex items-center gap-12">
-            <!-- Logo -->
             <a href="#" class="flex items-center gap-2 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
-                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor"/>
+                <!-- Logo Icon -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
+                    <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor"/>
                 </svg>
-                <span class="text-xl font-semibold tracking-tight">lightspark</span>
+                <span class="text-xl font-bold tracking-tight">lightspark</span>
             </a>
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
+            <!-- Desktop Left Links -->
+            <div class="hidden lg:flex items-center gap-8">
                 <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Products</a>
                 <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Use cases</a>
                 <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Customers</a>
@@ -47,109 +123,133 @@
             </div>
         </div>
 
-        <!-- Right: Secondary Nav -->
-        <div class="hidden md:flex items-center gap-8">
+        <!-- Desktop Right Links -->
+        <div class="hidden lg:flex items-center gap-8">
             <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">View Docs</a>
             <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Log in</a>
             <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Contact</a>
         </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
     </nav>
 
     <!-- Main Hero Content -->
-    <main class="flex-grow flex flex-col items-center w-full max-w-[1440px] mx-auto px-6 mt-20 lg:mt-32">
-        
-        <!-- Text Section -->
-        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
-            <!-- Headline -->
-            <div class="lg:col-span-7">
-                <h1 class="text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.1] font-medium tracking-tight text-[#111]">
-                    Products and APIs<br>
-                    for moving money
-                </h1>
-            </div>
-
-            <!-- Subtext & CTA -->
-            <div class="lg:col-span-5 flex flex-col justify-center lg:pl-12 pt-4">
-                <p class="text-xl text-gray-500 leading-relaxed max-w-md">
-                    Simple developer tools to send value instantly anywhere in the world on an open network.
-                </p>
-                <a href="#" class="mt-6 inline-flex items-center text-lg font-medium text-black hover:opacity-70 transition-opacity group">
-                    Explore Grid 
-                    <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Hero Image / Interactive Component -->
-        <div class="w-full relative rounded-t-[2.5rem] overflow-hidden h-[600px] md:h-[700px]">
-            <!-- Background Image (Sky Placeholder) -->
-            <img src="https://placehold.co/1400x900/2563eb/2563eb" alt="Sky Background" class="absolute inset-0 w-full h-full object-cover">
+    <main class="w-full pt-20 md:pt-32 pb-0">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
             
-            <!-- Overlay to simulate clouds/texture if needed, using a gradient here for depth -->
-            <div class="absolute inset-0 bg-gradient-to-b from-blue-400/30 to-blue-600/20 mix-blend-overlay"></div>
-            
-            <!-- Real Cloud Image Placeholder (using a more textured placeholder to mimic clouds) -->
-            <img src="https://placehold.co/1400x900/3b82f6/ffffff?text=Cloud+Texture+Background" alt="Clouds" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay">
-
-
-            <!-- Content inside the image container -->
-            <div class="relative z-10 w-full h-full flex flex-col">
+            <!-- Hero Text Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-24 items-start">
                 
-                <!-- Tabs Navigation -->
-                <div class="w-full px-6 py-8 overflow-x-auto no-scrollbar">
-                    <div class="flex items-center gap-2 min-w-max mx-auto md:justify-center">
-                        <button class="px-4 py-2 bg-white text-black rounded-full text-sm font-semibold shadow-sm">Cross-border</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Ramps</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Pay-ins</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Payouts</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Cards</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Rewards</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Payroll</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">FX</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Treasury</button>
-                        <button class="px-4 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors">Node management</button>
+                <!-- Headline (Left) -->
+                <div class="lg:col-span-7">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight leading-[1.05] text-balance text-[#111] animate-fade-in-up delay-100">
+                        Products and APIs <br class="hidden lg:block">
+                        for moving money
+                    </h1>
+                </div>
+
+                <!-- Description & CTA (Right) -->
+                <div class="lg:col-span-5 lg:pl-12 pt-2 lg:pt-4">
+                    <p class="text-lg md:text-[19px] leading-relaxed text-gray-500 text-pretty max-w-md animate-fade-in-up delay-200">
+                        Simple developer tools to send value instantly anywhere in the world on an open network.
+                    </p>
+                    
+                    <div class="mt-8 animate-fade-in-up delay-300">
+                        <a href="#" class="inline-flex items-center text-[17px] font-medium text-[#111] hover:opacity-70 transition-opacity group">
+                            Explore Grid
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual / Dashboard Mockup -->
+            <div class="relative w-full rounded-t-[32px] md:rounded-t-[48px] overflow-hidden h-[500px] md:h-[650px] animate-scale-in delay-400 group">
+                
+                <!-- Background Image (Cloud Texture) -->
+                <img 
+                    src="https://placehold.co/1600x900/9abdd6/ffffff?text= " 
+                    alt="Cloudy sky background" 
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+                >
+                
+                <!-- Overlay Gradient for better text readability if needed -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
+
+                <!-- Dashboard Navigation (Inside Image) -->
+                <div class="absolute top-0 left-0 right-0 p-6 md:p-8 overflow-x-auto no-scrollbar z-10">
+                    <div class="flex items-center gap-2 md:gap-4 min-w-max px-2">
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Cross-border</span>
+                        <span class="bg-white text-black text-sm font-medium px-4 py-1.5 rounded-full shadow-sm cursor-pointer">Ramps</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Pay-ins</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Payouts</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Cards</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Rewards</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Payroll</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">FX</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Treasury</span>
+                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Node management</span>
                     </div>
                 </div>
 
-                <!-- Glassmorphism Card -->
-                <div class="flex-grow flex items-end justify-center pb-0 md:pb-12">
-                    <div class="relative w-[380px] h-[240px] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-center p-6">
-                        
-                        <!-- Top User -->
-                        <div class="flex items-center justify-between text-white mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="relative">
-                                    <img src="https://placehold.co/48x48/333/fff?text=M" alt="Maria" class="w-12 h-12 rounded-full border-2 border-white/30">
-                                    <img src="https://placehold.co/16x16/firebrick/white?text=US" alt="US Flag" class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full border border-white">
+                <!-- Glass Card UI Element -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[420px] glass-card rounded-[32px] p-6 md:p-8 animate-fade-in-up delay-500">
+                    
+                    <!-- Top Row: Buy BTC -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <img src="https://placehold.co/100x100/e0e0e0/ffffff?text=User" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white/30 object-cover">
+                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
+                                    <img src="https://placehold.co/40x40/FF3B30/FFFFFF?text=US" alt="Flag" class="w-4 h-4 rounded-full object-cover">
                                 </div>
-                                <span class="text-lg font-medium tracking-wide">Maria</span>
                             </div>
-                            <span class="text-lg font-medium tracking-wide">US$250</span>
+                            <div>
+                                <div class="text-white/60 text-sm font-medium">Buy 0.004 BTC</div>
+                            </div>
                         </div>
+                        <div class="text-right">
+                            <div class="text-white/40 text-sm line-through">483.18 USD</div>
+                        </div>
+                    </div>
 
-                        <!-- Arrow -->
-                        <div class="flex justify-start pl-[1.6rem] my-1">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white/70">
-                                <path d="M12 4V20M12 20L18 14M12 20L6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Arrow Indicator -->
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-5 h-5 opacity-60">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
                             </svg>
                         </div>
-
-                        <!-- Bottom User -->
-                        <div class="flex items-center justify-between text-white mt-2">
-                            <div class="flex items-center gap-3">
-                                <div class="relative">
-                                    <img src="https://placehold.co/48x48/555/fff?text=E" alt="Elena" class="w-12 h-12 rounded-full border-2 border-white/30">
-                                    <img src="https://placehold.co/16x16/green/white?text=MX" alt="MX Flag" class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full border border-white">
-                                </div>
-                                <span class="text-lg font-medium tracking-wide">Elena</span>
-                            </div>
-                            <span class="text-lg font-medium tracking-wide">MX$4,600</span>
-                        </div>
-
-                        <!-- Subtle glare effect -->
-                        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
                     </div>
+
+                    <!-- Bottom Row: Pay with -->
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <img src="https://placehold.co/100x100/d4e1e8/ffffff?text=User2" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white/30 object-cover">
+                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
+                                    <img src="https://placehold.co/40x40/4CD964/FFFFFF?text=Bank" alt="Bank" class="w-4 h-4 rounded-full object-cover">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-white/60 text-sm font-medium">Pay with</div>
+                                <div class="text-white/80 text-sm font-medium">Acme Checking *4739</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-white text-lg font-medium">484.60 USD</div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </main>
