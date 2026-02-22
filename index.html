@@ -3,83 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightspark - Pixel Perfect Recreation</title>
+    <title>Lightspark - Products and APIs for moving money</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Typography Utilities */
-        .text-balance { text-wrap: balance; }
-        .text-pretty { text-wrap: pretty; }
-        
-        /* Custom Font Settings */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-
-        /* Animation keyframes */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-                filter: blur(4px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* Base animation classes */
         .animate-fade-in-up {
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         .animate-fade-in {
             opacity: 0;
-            animation: fadeIn 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         .animate-scale-in {
             opacity: 0;
-            animation: scaleIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Staggered delays */
         .delay-0 { animation-delay: 0ms; }
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
         .delay-400 { animation-delay: 400ms; }
-        .delay-500 { animation-delay: 500ms; }
-        .delay-700 { animation-delay: 700ms; }
 
-        /* Glassmorphism utilities */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        .text-balance { text-wrap: balance; }
+        .text-pretty { text-wrap: pretty; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in-up, .animate-fade-in, .animate-scale-in {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
         }
 
-        /* Hide scrollbar for horizontal scrolling nav */
+        /* Hide scrollbar for tabs */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -87,170 +57,147 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            .animate-fade-in-up,
-            .animate-fade-in,
-            .animate-scale-in {
-                animation: none;
-                opacity: 1;
-                transform: none;
-                filter: none;
-            }
-        }
     </style>
 </head>
-<body class="bg-[#FAFAFA] text-[#111111] overflow-x-hidden">
+<body class="bg-[#FAFAFA] font-sans antialiased text-[#111111] selection:bg-black selection:text-white">
 
     <!-- Navigation -->
-    <nav class="w-full px-6 py-6 md:px-10 flex items-center justify-between animate-fade-in delay-0 relative z-50">
-        <!-- Logo Section -->
-        <div class="flex items-center gap-12">
+    <header class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-6 flex items-center justify-between animate-fade-in delay-0">
+        <div class="flex items-center gap-10">
+            <!-- Logo -->
             <a href="#" class="flex items-center gap-2 group">
-                <!-- Logo Icon -->
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
-                    <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
+                    <path d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z" fill="currentColor"/>
+                    <path d="M4.5 4.5L10 10L4.5 15.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-hover:opacity-100 transition-opacity"/>
                 </svg>
-                <span class="text-xl font-bold tracking-tight">lightspark</span>
+                <span class="text-[22px] font-semibold tracking-tight">lightspark</span>
             </a>
 
-            <!-- Desktop Left Links -->
-            <div class="hidden lg:flex items-center gap-8">
-                <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Products</a>
-                <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Use cases</a>
-                <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Customers</a>
-                <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Company</a>
-            </div>
+            <!-- Main Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Products</a>
+                <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Use cases</a>
+                <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Customers</a>
+                <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Company</a>
+            </nav>
         </div>
 
-        <!-- Desktop Right Links -->
-        <div class="hidden lg:flex items-center gap-8">
-            <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">View Docs</a>
-            <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Log in</a>
-            <a href="#" class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors">Contact</a>
+        <!-- Right Nav Links -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">View Docs</a>
+            <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Log in</a>
+            <a href="#" class="text-[15px] text-[#444444] hover:text-black transition-colors duration-200">Contact</a>
         </div>
+    </header>
 
-        <!-- Mobile Menu Button -->
-        <button class="lg:hidden text-black">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
-    </nav>
-
-    <!-- Main Hero Content -->
-    <main class="w-full pt-20 md:pt-32 pb-0">
-        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+    <!-- Hero Section -->
+    <main class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-20 lg:pt-28 pb-16">
+        
+        <!-- Text Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start mb-16 lg:mb-20">
             
-            <!-- Hero Text Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-24 items-start">
-                
-                <!-- Headline (Left) -->
-                <div class="lg:col-span-7">
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight leading-[1.05] text-balance text-[#111] animate-fade-in-up delay-100">
-                        Products and APIs <br class="hidden lg:block">
-                        for moving money
-                    </h1>
-                </div>
+            <!-- Headline -->
+            <div class="lg:col-span-7 animate-fade-in-up delay-100">
+                <h1 class="text-[48px] md:text-[64px] lg:text-[76px] leading-[1.05] font-medium tracking-[-0.02em] text-[#111111] text-balance">
+                    Products and APIs<br>for moving money
+                </h1>
+            </div>
 
-                <!-- Description & CTA (Right) -->
-                <div class="lg:col-span-5 lg:pl-12 pt-2 lg:pt-4">
-                    <p class="text-lg md:text-[19px] leading-relaxed text-gray-500 text-pretty max-w-md animate-fade-in-up delay-200">
-                        Simple developer tools to send value instantly anywhere in the world on an open network.
-                    </p>
+            <!-- Subheadline & CTA -->
+            <div class="lg:col-span-4 lg:col-start-9 pt-2 lg:pt-4 animate-fade-in-up delay-200">
+                <p class="text-[16px] lg:text-[18px] leading-[1.6] text-[#555555] text-pretty mb-6">
+                    Simple developer tools to send value instantly anywhere in the world on an open network.
+                </p>
+                <a href="#" class="inline-flex items-center gap-1.5 text-[16px] font-medium text-[#111111] hover:opacity-70 transition-opacity duration-200 active:scale-97">
+                    Explore Grid
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.33331 8H12.6666" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 3.33331L12.6667 7.99998L8 12.6666" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Interactive Image Area -->
+        <div class="relative w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-[24px] lg:rounded-[32px] overflow-hidden animate-scale-in delay-300 shadow-sm bg-[#b89772]">
+            
+            <!-- Background Image (Wheat Field Placeholder) -->
+            <img src="https://placehold.co/1440x800/b89772/ffffff?text=Wheat+Field" alt="Wheat Field Background" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-80">
+            
+            <!-- Subtle Overlays for text contrast -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent h-32 z-0"></div>
+            <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-0"></div>
+
+            <!-- Top Tabs -->
+            <div class="absolute top-0 left-0 w-full px-6 lg:px-8 py-6 flex items-center gap-1 overflow-x-auto no-scrollbar z-10">
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Cross-border</button>
+                <button class="px-3 py-1.5 bg-white text-[#111111] text-[14px] font-medium rounded-md whitespace-nowrap shadow-sm">Ramps</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Pay-ins</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Payouts</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Cards</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Rewards</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Payroll</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">FX</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Treasury</button>
+                <button class="px-3 py-1.5 text-white/80 text-[14px] font-medium whitespace-nowrap hover:text-white transition-colors duration-200">Node management</button>
+            </div>
+
+            <!-- UI Card -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[360px] z-20">
+                <div class="bg-[#F3EFEA] rounded-[20px] p-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)]">
                     
-                    <div class="mt-8 animate-fade-in-up delay-300">
-                        <a href="#" class="inline-flex items-center text-[17px] font-medium text-[#111] hover:opacity-70 transition-opacity group">
-                            Explore Grid
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
+                    <div class="flex justify-between items-baseline mb-5">
+                        <span class="text-[17px] font-semibold text-[#111111]">Buy 0.004 BTC</span>
+                        <span class="text-[14px] text-[#555555]">483.84 USD</span>
                     </div>
+                    
+                    <div class="h-[1px] w-full bg-black/5 mb-5"></div>
+                    
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-black/5 shrink-0">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#555555]">
+                                <path d="M3 21h18"></path>
+                                <path d="M3 10h18"></path>
+                                <path d="M5 6l7-3 7 3"></path>
+                                <path d="M4 10v11"></path>
+                                <path d="M20 10v11"></path>
+                                <path d="M8 14v3"></path>
+                                <path d="M12 14v3"></path>
+                                <path d="M16 14v3"></path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[12px] text-[#555555] leading-tight">Pay with</span>
+                            <span class="text-[14px] font-medium text-[#111111] leading-tight mt-0.5">Acme Checking *4739</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-3 bg-[#7A4F21] hover:bg-[#63401A] text-white text-[15px] font-medium rounded-xl transition-colors duration-200">
+                        Buy now
+                    </button>
                 </div>
             </div>
 
-            <!-- Hero Visual / Dashboard Mockup -->
-            <div class="relative w-full rounded-t-[32px] md:rounded-t-[48px] overflow-hidden h-[500px] md:h-[650px] animate-scale-in delay-400 group">
-                
-                <!-- Background Image (Cloud Texture) -->
-                <img 
-                    src="https://placehold.co/1600x900/9abdd6/ffffff?text= " 
-                    alt="Cloudy sky background" 
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-                >
-                
-                <!-- Overlay Gradient for better text readability if needed -->
-                <div class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
-
-                <!-- Dashboard Navigation (Inside Image) -->
-                <div class="absolute top-0 left-0 right-0 p-6 md:p-8 overflow-x-auto no-scrollbar z-10">
-                    <div class="flex items-center gap-2 md:gap-4 min-w-max px-2">
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Cross-border</span>
-                        <span class="bg-white text-black text-sm font-medium px-4 py-1.5 rounded-full shadow-sm cursor-pointer">Ramps</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Pay-ins</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Payouts</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Cards</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Rewards</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Payroll</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">FX</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Treasury</span>
-                        <span class="text-white/60 text-sm font-medium px-3 py-1.5 cursor-pointer hover:text-white transition-colors">Node management</span>
-                    </div>
+            <!-- Code Block -->
+            <div class="absolute bottom-6 left-6 lg:bottom-8 lg:left-8 z-20 flex gap-4 font-mono text-[11px] lg:text-[12px] leading-[1.6]">
+                <div class="flex flex-col text-white/40 text-right select-none">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
                 </div>
-
-                <!-- Glass Card UI Element -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[420px] glass-card rounded-[32px] p-6 md:p-8 animate-fade-in-up delay-500">
-                    
-                    <!-- Top Row: Buy BTC -->
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center gap-4">
-                            <div class="relative">
-                                <img src="https://placehold.co/100x100/e0e0e0/ffffff?text=User" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white/30 object-cover">
-                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                                    <img src="https://placehold.co/40x40/FF3B30/FFFFFF?text=US" alt="Flag" class="w-4 h-4 rounded-full object-cover">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-white/60 text-sm font-medium">Buy 0.004 BTC</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-white/40 text-sm line-through">483.18 USD</div>
-                        </div>
-                    </div>
-
-                    <!-- Arrow Indicator -->
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-5 h-5 opacity-60">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Row: Pay with -->
-                    <div class="flex items-center justify-between mt-2">
-                        <div class="flex items-center gap-4">
-                            <div class="relative">
-                                <img src="https://placehold.co/100x100/d4e1e8/ffffff?text=User2" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white/30 object-cover">
-                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                                    <img src="https://placehold.co/40x40/4CD964/FFFFFF?text=Bank" alt="Bank" class="w-4 h-4 rounded-full object-cover">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-white/60 text-sm font-medium">Pay with</div>
-                                <div class="text-white/80 text-sm font-medium">Acme Checking *4739</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-white text-lg font-medium">484.60 USD</div>
-                        </div>
-                    </div>
-
+                <div class="flex flex-col text-white/90 whitespace-pre">
+<span class="text-white/50"># On-ramp: Fiat to crypto</span>
+<span><span class="text-blue-300">curl</span> -X POST 'https://api.lightspark.com/grid/2023-10-13/quotes' \</span>
+<span>  -u "$GRID_API_KEY:$GRID_API_SECRET" \</span>
+<span>  -H 'Content-Type: application/json' \</span>
+<span>  -d '{</span>
+<span>    "source": {</span>
+<span>      "customerId": "Customer:019542f5-b3c7-4d02-8000-000000000001",</span>
+<span>      "currency": "USD"</span>
+<span>    },</span>
+<span>    "destination": {</span>
+<span>      "externalAccountDetails": [</span>
                 </div>
-
             </div>
+
         </div>
     </main>
 
